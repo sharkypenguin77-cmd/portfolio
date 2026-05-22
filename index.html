@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="鯊企鵝 / Sharky Penguin 的影片作品集，展示影像製作與剪輯作品。"
+    />
+    <title>鯊企鵝 / Sharky Penguin Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="回到首頁">
+        <span class="brand-mark" aria-hidden="true">SP</span>
+        <span class="brand-text">Sharky Penguin</span>
+      </a>
+      <nav class="site-nav" aria-label="主要導覽">
+        <a href="#works">作品</a>
+        <a href="#about">關於</a>
+        <a href="#contact">聯絡</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Video Producer / Video Editor</p>
+          <h1 id="hero-title">鯊企鵝 / Sharky Penguin</h1>
+          <p class="hero-intro">一起說個故事，把你的想法傳達出去。</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#works">觀看作品</a>
+            <a class="button secondary" href="mailto:sharkypenguin77@gmail.com">聯絡我</a>
+          </div>
+        </div>
+
+        <div class="showreel-panel" aria-label="Showreel 預留區">
+          <div class="reel-frame">
+            <div class="play-symbol" aria-hidden="true"></div>
+            <div class="reel-copy">
+              <span>Sample Showreel</span>
+              <p>60 秒精華剪輯範例</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section works-section" id="works" aria-labelledby="works-title">
+        <div class="section-heading">
+          <p class="eyebrow">Selected Works</p>
+          <h2 id="works-title">作品</h2>
+        </div>
+
+        <div class="filter-bar" aria-label="作品分類篩選">
+          <button class="filter-button active" type="button" data-filter="all">全部</button>
+          <button class="filter-button" type="button" data-filter="brand">形象影片</button>
+          <button class="filter-button" type="button" data-filter="short">短影音</button>
+          <button class="filter-button" type="button" data-filter="social-ad">社群廣告</button>
+          <button class="filter-button" type="button" data-filter="youtube">YT長片</button>
+        </div>
+
+        <div class="works-grid" id="works-grid"></div>
+        <div class="empty-state" id="empty-state">
+          <p class="empty-title">作品準備中</p>
+          <p>這裡會放精選影片作品。第一版先保留乾淨空間，等作品資料加入後會自動顯示。</p>
+        </div>
+      </section>
+
+      <section class="section about-section" id="about" aria-labelledby="about-title">
+        <div class="section-heading">
+          <p class="eyebrow">About</p>
+          <h2 id="about-title">關於我</h2>
+        </div>
+        <div class="about-layout">
+          <p>
+            我是鯊企鵝 / Sharky Penguin，專注於影像製作與影片剪輯。喜歡把想法整理成清楚的敘事，
+            讓觀眾更快理解訊息，也讓每支影片保有適合它的節奏與情緒。
+          </p>
+          <ul class="skill-list" aria-label="服務項目">
+            <li>影片企劃與製作</li>
+            <li>剪輯與敘事節奏</li>
+            <li>字幕與社群短影音</li>
+            <li>基礎動態圖像</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+        <div class="section-heading">
+          <p class="eyebrow">Contact</p>
+          <h2 id="contact-title">聯絡</h2>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:sharkypenguin77@gmail.com">sharkypenguin77@gmail.com</a>
+          <a href="https://www.instagram.com/sharky_penguin/" target="_blank" rel="noreferrer">
+            Instagram
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> Sharky Penguin. Video Portfolio.</p>
+    </footer>
+
+    <script src="works.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
