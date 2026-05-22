@@ -69,10 +69,16 @@ window.portfolioWorks = [
 
 如果不想手動改 `works.js`，可以使用本機後台。
 
-在 `J:\portfolio` 開啟 PowerShell，執行：
+最簡單的方式是點兩下：
+
+```text
+start-admin.bat
+```
+
+也可以在 `J:\portfolio` 開啟 PowerShell，執行：
 
 ```powershell
-.\tools\admin-server.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\admin-server.ps1
 ```
 
 接著打開：
