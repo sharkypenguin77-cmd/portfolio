@@ -306,8 +306,26 @@ h2 {
 }
 
 .work-thumb {
+  position: relative;
   aspect-ratio: 16 / 9;
   background: linear-gradient(135deg, #503060, #c9a7dd);
+}
+
+.work-thumb.has-video::after {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  margin: auto;
+  border: 2px solid rgba(255, 255, 255, 0.86);
+  border-radius: 50%;
+  background: rgba(33, 21, 40, 0.28);
+  color: white;
+  content: "▶";
+  font-size: 20px;
+  line-height: 1;
 }
 
 .work-body {
@@ -347,9 +365,76 @@ h2 {
 
 .work-link {
   display: inline-flex;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
   margin-top: 16px;
+  padding: 0;
   color: var(--accent-dark);
   font-weight: 800;
+}
+
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.video-modal[hidden] {
+  display: none;
+}
+
+.video-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(33, 21, 40, 0.72);
+}
+
+.video-modal-panel {
+  position: relative;
+  z-index: 1;
+  width: min(980px, 100%);
+  background: white;
+  box-shadow: 0 30px 80px rgba(33, 21, 40, 0.32);
+}
+
+.video-modal-close {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.video-frame {
+  aspect-ratio: 16 / 9;
+  background: #211528;
+}
+
+.video-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-modal-info {
+  padding: 20px;
+}
+
+.video-modal-info h2 {
+  font-size: clamp(24px, 4vw, 40px);
 }
 
 .empty-state {

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sharky Penguin Portfolio Admin</title>
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <main class="admin-shell">
+      <section class="admin-header">
+        <div>
+          <p class="eyebrow">Local Admin</p>
+          <h1>作品更新器</h1>
+          <p>新增、修改作品資料，儲存後會更新本機的 works.js。</p>
+        </div>
+        <div class="admin-actions">
+          <a class="button secondary" href="/" target="_blank">預覽網站</a>
+          <button class="button primary" type="button" id="save-button">儲存作品資料</button>
+          <button class="button deploy" type="button" id="deploy-button">部署上線</button>
+        </div>
+      </section>
+
+      <section class="admin-layout">
+        <aside class="works-list" aria-label="作品清單">
+          <button class="button full" type="button" id="new-button">新增作品</button>
+          <div id="work-list"></div>
+        </aside>
+
+        <form class="editor" id="work-form">
+          <label>
+            作品名稱
+            <input name="title" required />
+          </label>
+
+          <div class="field-row">
+            <label>
+              年份
+              <input name="year" required />
+            </label>
+            <label>
+              分類
+              <select name="category" required>
+                <option value="brand">形象影片</option>
+                <option value="short">短影音</option>
+                <option value="social-ad">社群廣告</option>
+                <option value="youtube">YT長片</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            你的角色
+            <input name="role" placeholder="剪輯 / 字幕 / 調色" />
+          </label>
+
+          <label>
+            使用工具
+            <input name="tools" placeholder="Premiere Pro, After Effects" />
+          </label>
+
+          <label>
+            影片網址 YouTube / Vimeo
+            <input name="videoUrl" placeholder="https://www.youtube.com/watch?v=..." />
+          </label>
+
+          <label>
+            自動產生的嵌入網址
+            <input name="embedUrl" readonly />
+          </label>
+
+          <label>
+            縮圖網址
+            <input name="thumbnailUrl" placeholder="可先留空" />
+          </label>
+
+          <label>
+            作品簡介
+            <textarea name="description" rows="5"></textarea>
+          </label>
+
+          <label class="checkbox-line">
+            <input name="isSample" type="checkbox" />
+            這是範例作品
+          </label>
+
+          <div class="editor-actions">
+            <button class="button primary" type="submit">套用到清單</button>
+            <button class="button danger" type="button" id="delete-button">刪除這筆</button>
+          </div>
+        </form>
+      </section>
+
+      <pre class="status" id="status">等待操作。</pre>
+    </main>
+
+    <script src="works.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>
