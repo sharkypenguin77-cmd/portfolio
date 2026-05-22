@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Huninn&display=swap");
+
 :root {
   --bg: #ffffff;
   --surface: #ffffff;
@@ -26,6 +28,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family:
+    "Huninn",
     "Inter",
     "Noto Sans TC",
     "Microsoft JhengHei",
