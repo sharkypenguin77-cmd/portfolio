@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Huninn&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800&display=swap");
 
 :root {
   --bg: #ffffff;
@@ -28,8 +28,6 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family:
-    "Huninn",
-    "Inter",
     "Noto Sans TC",
     "Microsoft JhengHei",
     "PingFang TC",

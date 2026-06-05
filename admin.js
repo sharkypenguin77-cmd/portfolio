@@ -2,7 +2,8 @@ const categoryLabels = {
   brand: "形象影片",
   short: "短影音",
   "social-ad": "社群廣告",
-  youtube: "YT長片"
+  youtube: "YT長片",
+  nonprofit: "公益影片"
 };
 
 let works = structuredClone(window.portfolioWorks || []);

@@ -50,6 +50,7 @@ window.portfolioWorks = [
 - `short`：短影音
 - `social-ad`：社群廣告
 - `youtube`：YT長片
+- `nonprofit`：公益影片
 
 ## Showreel
 
