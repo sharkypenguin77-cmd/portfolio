@@ -68,6 +68,58 @@ window.portfolioWorks = [
     isSample: false
   },
   {
+    title: "邀請法國人來甘比亞玩搭乘大眾運輸自由行",
+    year: "",
+    category: "youtube",
+    categoryLabel: "YT長片",
+    role: "長片剪輯 / 字幕 / 影片包裝",
+    tools: "",
+    description: "YouTube 長片作品，整理旅遊與人物互動素材，維持故事節奏與觀看流暢度。",
+    videoUrl: "https://www.youtube.com/watch?v=hD1WBR24W3Y",
+    embedUrl: "https://www.youtube.com/embed/hD1WBR24W3Y",
+    thumbnailUrl: "https://i.ytimg.com/vi/hD1WBR24W3Y/hqdefault.jpg",
+    isSample: false
+  },
+  {
+    title: "YT 長片作品 - _Dypo4KP07A",
+    year: "",
+    category: "youtube",
+    categoryLabel: "YT長片",
+    role: "長片剪輯 / 字幕 / 影片包裝",
+    tools: "",
+    description: "YouTube 長片作品，針對長篇素材進行敘事整理、節奏剪輯與觀看體驗優化。",
+    videoUrl: "https://www.youtube.com/watch?v=_Dypo4KP07A",
+    embedUrl: "https://www.youtube.com/embed/_Dypo4KP07A",
+    thumbnailUrl: "https://i.ytimg.com/vi/_Dypo4KP07A/hqdefault.jpg",
+    isSample: false
+  },
+  {
+    title: "YT 長片作品 - ekCYwRmCJCc",
+    year: "",
+    category: "youtube",
+    categoryLabel: "YT長片",
+    role: "長片剪輯 / 字幕 / 影片包裝",
+    tools: "",
+    description: "YouTube 長片作品，針對長篇素材進行敘事整理、節奏剪輯與觀看體驗優化。",
+    videoUrl: "https://www.youtube.com/watch?v=ekCYwRmCJCc",
+    embedUrl: "https://www.youtube.com/embed/ekCYwRmCJCc",
+    thumbnailUrl: "https://i.ytimg.com/vi/ekCYwRmCJCc/hqdefault.jpg",
+    isSample: false
+  },
+  {
+    title: "身世之謎大公開「離開台灣到OO找生父」",
+    year: "",
+    category: "youtube",
+    categoryLabel: "YT長片",
+    role: "長片剪輯 / 字幕 / 影片包裝",
+    tools: "",
+    description: "YouTube 長片作品，整理人物故事與情緒段落，讓長片敘事更清楚並保留觀看節奏。",
+    videoUrl: "https://www.youtube.com/watch?v=aiNDyJAtJgE",
+    embedUrl: "https://www.youtube.com/embed/aiNDyJAtJgE",
+    thumbnailUrl: "https://i.ytimg.com/vi/aiNDyJAtJgE/hqdefault.jpg",
+    isSample: false
+  },
+  {
     title: "公益影片 - Instagram Reel",
     year: "2026",
     category: "nonprofit",
