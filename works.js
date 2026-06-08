@@ -12,7 +12,7 @@ window.portfolioWorks = [
         "description":  "【台北造起來】老店新風貌宣傳短片。本片為與臺北市商業處合作之社群宣傳短影音，旨在推廣萬華與迪化街的「老店翻新」與城市人文",
         "videoUrl":  "https://www.facebook.com/reel/722521974161521",
         "embedUrl":  "",
-        "thumbnailUrl":  "",
+        "thumbnailUrl":  "assets/covers/VS--20Facebook-0-13.jpg",
         "thumbnailFit":  "contain",
         "thumbnailPositionX":  50,
         "thumbnailPositionY":  50,
