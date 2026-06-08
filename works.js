@@ -3,6 +3,22 @@
 
 window.portfolioWorks = [
     {
+        "title":  "【社群廣告】貓砂引流廣告",
+        "year":  "2026",
+        "category":  "social-ad",
+        "categoryLabel":  "社群廣告",
+        "role":  "企劃 / 拍攝 / 剪輯",
+        "tools":  "",
+        "description":  "",
+        "videoUrl":  "https://youtube.com/shorts/ORJzL4OtSP4?feature=share",
+        "embedUrl":  "https://www.youtube.com/embed/ORJzL4OtSP4",
+        "thumbnailUrl":  "assets/covers/2026-06-08-152817.png",
+        "thumbnailFit":  "contain",
+        "thumbnailPositionX":  50,
+        "thumbnailPositionY":  50,
+        "isSample":  false
+    },
+    {
         "title":  "【短影音作品】清潔公司老闆 - 恐怖排水孔怎麼處理",
         "year":  "2026",
         "category":  "short",
@@ -14,8 +30,8 @@ window.portfolioWorks = [
         "embedUrl":  "",
         "thumbnailUrl":  "assets/covers/689540104_17940783333212396_3856789125628256322_n-20260608150044.jpg",
         "thumbnailFit":  "contain",
-        "thumbnailPositionX":  50,
-        "thumbnailPositionY":  50,
+        "thumbnailPositionX":  48,
+        "thumbnailPositionY":  54,
         "isSample":  false
     },
     {
@@ -28,7 +44,10 @@ window.portfolioWorks = [
         "description":  "以攻略型內容整理寵物品牌全系列罐頭特色，協助觀眾快速理解產品差異。",
         "videoUrl":  "https://youtube.com/shorts/meNCJ469rBU?feature=share",
         "embedUrl":  "https://www.youtube.com/embed/meNCJ469rBU",
-        "thumbnailUrl":  "https://i.ytimg.com/vi/meNCJ469rBU/hqdefault.jpg",
+        "thumbnailUrl":  "assets/covers/cover.jpg",
+        "thumbnailFit":  "cover",
+        "thumbnailPositionX":  50,
+        "thumbnailPositionY":  63,
         "isSample":  false
     },
     {
@@ -42,22 +61,9 @@ window.portfolioWorks = [
         "videoUrl":  "https://www.instagram.com/reel/DMPCaSWv74E/",
         "embedUrl":  "",
         "thumbnailUrl":  "assets/covers/520710063_18367420744147115_4609283519474633192_n-20260608145616.jpg",
-        "thumbnailFit":  "contain",
+        "thumbnailFit":  "cover",
         "thumbnailPositionX":  50,
-        "thumbnailPositionY":  50,
-        "isSample":  false
-    },
-    {
-        "title":  "寵物品牌 - 貓砂引流影片",
-        "year":  "2026",
-        "category":  "social-ad",
-        "categoryLabel":  "社群廣告",
-        "role":  "影片剪輯 / 字幕 / 社群廣告",
-        "tools":  "",
-        "description":  "針對貓砂產品製作引流內容，透過社群影片引導觀眾理解產品特色。",
-        "videoUrl":  "https://www.facebook.com/100092244228464/posts/903598842724915/",
-        "embedUrl":  "",
-        "thumbnailUrl":  "",
+        "thumbnailPositionY":  74,
         "isSample":  false
     },
     {
