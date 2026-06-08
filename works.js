@@ -151,7 +151,7 @@ window.portfolioWorks = [
         "isSample":  false
     },
     {
-        "title":  "【公益短片】狗狗英雄背後的幕後推手",
+        "title":  "【公益短片】狗英雄背後的幕後推手",
         "year":  "2024",
         "category":  "nonprofit",
         "categoryLabel":  "公益影片",
