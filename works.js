@@ -3,13 +3,13 @@
 
 window.portfolioWorks = [
     {
-        "title":  "【形象短片】#台北造起來 老店新風貌宣傳短片",
+        "title":  "【形象短片】",
         "year":  "2026",
         "category":  "brand",
         "categoryLabel":  "形象影片",
         "role":  "剪輯",
         "tools":  "",
-        "description":  "本片為與臺北市商業處合作之社群宣傳短影音，旨在推廣萬華與迪化街的「老店翻新」與城市人文",
+        "description":  "【台北造起來】老店新風貌宣傳短片。本片為與臺北市商業處合作之社群宣傳短影音，旨在推廣萬華與迪化街的「老店翻新」與城市人文",
         "videoUrl":  "https://www.facebook.com/reel/722521974161521",
         "embedUrl":  "",
         "thumbnailUrl":  "assets/covers/VS--20Facebook-0-13.jpg",
@@ -79,7 +79,7 @@ window.portfolioWorks = [
         "thumbnailUrl":  "assets/covers/cover.jpg",
         "thumbnailFit":  "cover",
         "thumbnailPositionX":  50,
-        "thumbnailPositionY":  63,
+        "thumbnailPositionY":  68,
         "isSample":  false
     },
     {
