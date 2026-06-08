@@ -379,7 +379,9 @@ h2 {
   inset: 0;
   z-index: 50;
   display: grid;
-  place-items: center;
+  align-items: start;
+  justify-items: center;
+  overflow: auto;
   padding: 20px;
 }
 
@@ -397,12 +399,14 @@ h2 {
   position: relative;
   z-index: 1;
   width: min(980px, 100%);
+  margin: auto 0;
   background: white;
   box-shadow: 0 30px 80px rgba(33, 21, 40, 0.32);
 }
 
 .video-modal-panel.is-instagram {
   width: min(620px, 100%);
+  margin: 56px 0 24px;
 }
 
 .video-modal-close {
@@ -427,17 +431,16 @@ h2 {
 }
 
 .video-frame.instagram-frame {
-  display: grid;
+  display: block;
   aspect-ratio: auto;
-  max-height: 78vh;
-  min-height: 520px;
-  overflow: auto;
-  place-items: center;
+  min-height: 0;
+  overflow: visible;
   background: #ffffff;
   padding: 14px;
 }
 
 .video-frame.instagram-frame .instagram-media {
+  margin: 0 auto !important;
   min-width: 326px !important;
   width: min(540px, 100%) !important;
 }
