@@ -3,6 +3,22 @@
 
 window.portfolioWorks = [
     {
+        "title":  "【公益短片】搜救犬無酬搜救的真相",
+        "year":  "2025",
+        "category":  "nonprofit",
+        "categoryLabel":  "公益影片",
+        "role":  "企劃 / 拍攝 / 剪輯",
+        "tools":  "",
+        "description":  "單平台300萬觀看，抓取大眾關注的核心，深入議題讓品牌的公益活動讓更多人看見",
+        "videoUrl":  "https://www.instagram.com/dogcat.star/reel/DONMxmLEnp3/",
+        "embedUrl":  "",
+        "thumbnailUrl":  "assets/covers/2025_---EP1_COVER-20260608154151.jpg",
+        "thumbnailFit":  "contain",
+        "thumbnailPositionX":  50,
+        "thumbnailPositionY":  50,
+        "isSample":  false
+    },
+    {
         "title":  "【社群廣告】貓砂引流廣告",
         "year":  "2026",
         "category":  "social-ad",
@@ -119,16 +135,16 @@ window.portfolioWorks = [
         "isSample":  false
     },
     {
-        "title":  "【公益短片】搜救犬無酬搜救的真相",
-        "year":  "2026",
+        "title":  "【公益短片】狗狗應學背後的幕後推手",
+        "year":  "2024",
         "category":  "nonprofit",
         "categoryLabel":  "公益影片",
         "role":  "企劃 / 拍攝 / 影片剪輯",
         "tools":  "",
-        "description":  "公益社群影片作品，協助議題以更容易被觀看與分享的方式傳達",
+        "description":  "單平台700萬觀看，協助議題以更容易被觀看與分享的方式傳達",
         "videoUrl":  "https://www.instagram.com/reel/DONMxmLEnp3/?utm_source=ig_web_copy_link\u0026igsh=NTc4MTIwNjQ2YQ==",
         "embedUrl":  "",
-        "thumbnailUrl":  "assets/covers/2025_---EP1_COVER.jpg",
+        "thumbnailUrl":  "assets/covers/503373101_1115353500350958_2414600092405525829_n.jpg",
         "thumbnailFit":  "contain",
         "thumbnailPositionX":  50,
         "thumbnailPositionY":  50,
