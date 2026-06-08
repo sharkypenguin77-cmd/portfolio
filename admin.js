@@ -17,6 +17,7 @@ const deployButton = document.querySelector("#deploy-button");
 const newButton = document.querySelector("#new-button");
 const deleteButton = document.querySelector("#delete-button");
 const uploadVideoButton = document.querySelector("#upload-video-button");
+const uploadCoverButton = document.querySelector("#upload-cover-button");
 const fields = form.elements;
 
 function setStatus(message) {
@@ -52,6 +53,29 @@ function getEmbedUrl(url) {
   }
 
   return "";
+}
+
+function getYoutubeThumbnailUrl(url) {
+  if (!url) return "";
+
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.replace(/^www\./, "");
+    let id = "";
+
+    if (host === "youtu.be") {
+      id = parsed.pathname.split("/").filter(Boolean)[0] || "";
+    }
+
+    if (host === "youtube.com" || host === "m.youtube.com") {
+      const segments = parsed.pathname.split("/").filter(Boolean);
+      id = parsed.searchParams.get("v") || segments.at(-1) || "";
+    }
+
+    return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : "";
+  } catch (error) {
+    return "";
+  }
 }
 
 function isDirectVideoUrl(url) {
@@ -128,6 +152,10 @@ function readForm() {
 fields.videoUrl.addEventListener("input", () => {
   const videoUrl = fields.videoUrl.value.trim();
   fields.embedUrl.value = isDirectVideoUrl(videoUrl) ? "" : getEmbedUrl(videoUrl);
+
+  if (!fields.thumbnailUrl.value.trim()) {
+    fields.thumbnailUrl.value = getYoutubeThumbnailUrl(videoUrl);
+  }
 });
 
 fields.category.addEventListener("change", () => {
@@ -167,6 +195,39 @@ uploadVideoButton.addEventListener("click", async () => {
   fields.videoUrl.value = result.url;
   fields.embedUrl.value = "";
   setStatus(`影片已上傳：${result.url}。記得按「套用到清單」和「儲存作品資料」。`);
+});
+
+uploadCoverButton.addEventListener("click", async () => {
+  const file = fields.coverFile.files[0];
+  if (!file) {
+    setStatus("請先選擇封面圖。");
+    return;
+  }
+
+  if (file.size > 10 * 1024 * 1024) {
+    setStatus("封面圖超過 10MB，請先壓縮後再上傳。");
+    return;
+  }
+
+  setStatus("封面圖上傳中，請稍候...");
+  const response = await fetch("/api/upload-cover", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/octet-stream",
+      "X-File-Name": encodeURIComponent(file.name)
+    },
+    body: file
+  });
+
+  const text = await response.text();
+  if (!response.ok) {
+    setStatus(text);
+    return;
+  }
+
+  const result = JSON.parse(text);
+  fields.thumbnailUrl.value = result.url;
+  setStatus(`封面圖已上傳：${result.url}。記得按「套用到清單」和「儲存作品資料」。`);
 });
 
 form.addEventListener("submit", (event) => {

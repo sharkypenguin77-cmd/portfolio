@@ -55,26 +55,28 @@ function isInstagramUrl(url) {
   }
 }
 
-function loadInstagramEmbed() {
-  if (window.instgrm?.Embeds?.process) {
-    window.instgrm.Embeds.process();
-    return;
-  }
+function getInstagramEmbedUrl(url) {
+  if (!url) return "";
 
-  if (document.querySelector('script[src="https://www.instagram.com/embed.js"]')) {
-    return;
-  }
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.replace(/^www\./, "");
+    if (host !== "instagram.com") return "";
 
-  const script = document.createElement("script");
-  script.src = "https://www.instagram.com/embed.js";
-  script.async = true;
-  document.body.append(script);
+    const [type, shortcode] = parsed.pathname.split("/").filter(Boolean);
+    if (!["p", "reel", "tv"].includes(type) || !shortcode) return "";
+
+    return `https://www.instagram.com/${type}/${shortcode}/embed/`;
+  } catch (error) {
+    return "";
+  }
 }
 
 function openVideo(work) {
   const embedUrl = work.embedUrl || getEmbedUrl(work.videoUrl);
   const hasDirectVideo = isDirectVideoUrl(work.videoUrl);
-  const hasInstagramEmbed = isInstagramUrl(work.videoUrl);
+  const instagramEmbedUrl = getInstagramEmbedUrl(work.videoUrl);
+  const hasInstagramEmbed = Boolean(instagramEmbedUrl);
 
   if (!embedUrl && !hasDirectVideo && !hasInstagramEmbed) {
     window.open(work.videoUrl, "_blank", "noreferrer");
@@ -86,8 +88,7 @@ function openVideo(work) {
   videoFrame.classList.toggle("instagram-frame", hasInstagramEmbed);
 
   if (hasInstagramEmbed) {
-    videoFrame.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${work.videoUrl}" data-instgrm-version="14"></blockquote>`;
-    loadInstagramEmbed();
+    videoFrame.innerHTML = `<iframe src="${instagramEmbedUrl}" title="${work.title}" allowtransparency="true" allowfullscreen></iframe>`;
   } else {
     videoFrame.innerHTML = hasDirectVideo
       ? `<video src="${work.videoUrl}" title="${work.title}" controls playsinline></video>`

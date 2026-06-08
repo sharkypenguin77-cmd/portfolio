@@ -38,6 +38,11 @@ function Get-ContentType {
     ".webm" { "video/webm" }
     ".ogg" { "video/ogg" }
     ".mov" { "video/quicktime" }
+    ".jpg" { "image/jpeg" }
+    ".jpeg" { "image/jpeg" }
+    ".png" { "image/png" }
+    ".webp" { "image/webp" }
+    ".gif" { "image/gif" }
     default { "application/octet-stream" }
   }
 }
@@ -118,6 +123,57 @@ window.portfolioWorks = $json;
       continue
     }
 
+    if ($request.HttpMethod -eq "POST" -and $request.Url.AbsolutePath -eq "/api/upload-cover") {
+      if ($request.ContentLength64 -gt 10485760) {
+        Send-Text $response 413 "Cover image is too large. Please keep it under 10MB."
+        continue
+      }
+
+      $rawName = [Uri]::UnescapeDataString($request.Headers["X-File-Name"])
+      if ([string]::IsNullOrWhiteSpace($rawName)) {
+        Send-Text $response 400 "Missing file name."
+        continue
+      }
+
+      $fileName = [System.IO.Path]::GetFileName($rawName)
+      foreach ($char in [System.IO.Path]::GetInvalidFileNameChars()) {
+        $fileName = $fileName.Replace($char, "-")
+      }
+
+      $extension = [System.IO.Path]::GetExtension($fileName).ToLowerInvariant()
+      if ($extension -notin @(".jpg", ".jpeg", ".png", ".webp", ".gif")) {
+        Send-Text $response 400 "Unsupported cover type. Use jpg, png, webp, or gif."
+        continue
+      }
+
+      $coverDir = Join-Path $root "assets\covers"
+      [System.IO.Directory]::CreateDirectory($coverDir) | Out-Null
+
+      $baseName = [System.IO.Path]::GetFileNameWithoutExtension($fileName)
+      $safeName = ($baseName -replace "[^A-Za-z0-9._-]", "-").Trim("-")
+      if ([string]::IsNullOrWhiteSpace($safeName)) {
+        $safeName = "cover"
+      }
+
+      $targetName = "$safeName$extension"
+      $targetPath = Join-Path $coverDir $targetName
+      if ([System.IO.File]::Exists($targetPath)) {
+        $targetName = "$safeName-$(Get-Date -Format 'yyyyMMddHHmmss')$extension"
+        $targetPath = Join-Path $coverDir $targetName
+      }
+
+      $fileStream = [System.IO.File]::Create($targetPath)
+      try {
+        $request.InputStream.CopyTo($fileStream)
+      } finally {
+        $fileStream.Close()
+      }
+
+      $publicPath = "assets/covers/$targetName"
+      Send-Text $response 200 "{`"url`":`"$publicPath`"}" "application/json; charset=utf-8"
+      continue
+    }
+
     if ($request.HttpMethod -eq "POST" -and $request.Url.AbsolutePath -eq "/api/deploy") {
       $status = git -C $root status --short
       if (-not $status) {
@@ -125,7 +181,7 @@ window.portfolioWorks = $json;
         continue
       }
 
-      git -C $root add works.js assets/videos
+      git -C $root add works.js assets/videos assets/covers
       git -C $root commit -m "Update portfolio works"
       git -C $root push
 

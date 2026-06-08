@@ -405,7 +405,7 @@ h2 {
 }
 
 .video-modal-panel.is-instagram {
-  width: min(620px, 100%);
+  width: min(460px, 100%);
   margin: 56px 0 24px;
 }
 
@@ -433,16 +433,17 @@ h2 {
 .video-frame.instagram-frame {
   display: block;
   aspect-ratio: auto;
-  min-height: 0;
-  overflow: visible;
+  height: 780px;
+  max-height: none;
+  overflow: hidden;
   background: #ffffff;
-  padding: 14px;
+  padding: 0;
 }
 
-.video-frame.instagram-frame .instagram-media {
-  margin: 0 auto !important;
-  min-width: 326px !important;
-  width: min(540px, 100%) !important;
+.video-frame.instagram-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .video-frame iframe {
