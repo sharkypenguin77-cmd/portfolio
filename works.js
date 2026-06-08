@@ -3,6 +3,22 @@
 
 window.portfolioWorks = [
     {
+        "title":  "【形象短片】",
+        "year":  "2026",
+        "category":  "brand",
+        "categoryLabel":  "形象影片",
+        "role":  "剪輯",
+        "tools":  "",
+        "description":  "【台北造起來】老店新風貌宣傳短片。本片為與臺北市商業處合作之社群宣傳短影音，旨在推廣萬華與迪化街的「老店翻新」與城市人文",
+        "videoUrl":  "https://www.facebook.com/reel/722521974161521",
+        "embedUrl":  "",
+        "thumbnailUrl":  "",
+        "thumbnailFit":  "contain",
+        "thumbnailPositionX":  50,
+        "thumbnailPositionY":  50,
+        "isSample":  false
+    },
+    {
         "title":  "【公益短片】搜救犬無酬搜救的真相",
         "year":  "2025",
         "category":  "nonprofit",
@@ -135,7 +151,7 @@ window.portfolioWorks = [
         "isSample":  false
     },
     {
-        "title":  "【公益短片】狗狗應學背後的幕後推手",
+        "title":  "【公益短片】狗狗英雄背後的幕後推手",
         "year":  "2024",
         "category":  "nonprofit",
         "categoryLabel":  "公益影片",
