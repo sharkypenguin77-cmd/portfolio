@@ -87,7 +87,7 @@ window.portfolioWorks = [
         "categoryLabel":  "YT長片",
         "role":  "長片剪輯 / 字幕 / 影片包裝",
         "tools":  "",
-        "description":  "YouTube 長片作品，有效處理 6 機素材，將長時間的競賽透過剪輯優化觀看體驗",
+        "description":  "YouTube 長片作品，有效處理 8 機素材，將長時間的競賽透過剪輯優化觀看體驗",
         "videoUrl":  "https://www.youtube.com/watch?v=ekCYwRmCJCc",
         "embedUrl":  "https://www.youtube.com/embed/ekCYwRmCJCc",
         "thumbnailUrl":  "https://i.ytimg.com/vi/ekCYwRmCJCc/hqdefault.jpg",
