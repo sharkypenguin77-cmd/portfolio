@@ -72,23 +72,43 @@ function getInstagramEmbedUrl(url) {
   }
 }
 
+function getFacebookEmbedUrl(url) {
+  if (!url) return "";
+
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.replace(/^www\./, "");
+    if (!["facebook.com", "m.facebook.com", "fb.watch"].includes(host)) return "";
+
+    return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=false&width=460`;
+  } catch (error) {
+    return "";
+  }
+}
+
 function openVideo(work) {
   const embedUrl = work.embedUrl || getEmbedUrl(work.videoUrl);
   const hasDirectVideo = isDirectVideoUrl(work.videoUrl);
   const instagramEmbedUrl = getInstagramEmbedUrl(work.videoUrl);
+  const facebookEmbedUrl = getFacebookEmbedUrl(work.videoUrl);
   const hasInstagramEmbed = Boolean(instagramEmbedUrl);
+  const hasFacebookEmbed = Boolean(facebookEmbedUrl);
 
-  if (!embedUrl && !hasDirectVideo && !hasInstagramEmbed) {
+  if (!embedUrl && !hasDirectVideo && !hasInstagramEmbed && !hasFacebookEmbed) {
     window.open(work.videoUrl, "_blank", "noreferrer");
     return;
   }
 
   videoModalTitle.textContent = work.title;
   videoModalPanel.classList.toggle("is-instagram", hasInstagramEmbed);
+  videoModalPanel.classList.toggle("is-facebook", hasFacebookEmbed);
   videoFrame.classList.toggle("instagram-frame", hasInstagramEmbed);
+  videoFrame.classList.toggle("facebook-frame", hasFacebookEmbed);
 
   if (hasInstagramEmbed) {
     videoFrame.innerHTML = `<iframe src="${instagramEmbedUrl}" title="${work.title}" allowtransparency="true" allowfullscreen></iframe>`;
+  } else if (hasFacebookEmbed) {
+    videoFrame.innerHTML = `<iframe src="${facebookEmbedUrl}" title="${work.title}" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>`;
   } else {
     videoFrame.innerHTML = hasDirectVideo
       ? `<video src="${work.videoUrl}" title="${work.title}" controls playsinline></video>`
@@ -102,7 +122,9 @@ function openVideo(work) {
 function closeVideo() {
   videoModal.hidden = true;
   videoModalPanel.classList.remove("is-instagram");
+  videoModalPanel.classList.remove("is-facebook");
   videoFrame.classList.remove("instagram-frame");
+  videoFrame.classList.remove("facebook-frame");
   videoFrame.innerHTML = "";
   document.body.style.overflow = "";
 }

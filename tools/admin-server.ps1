@@ -194,6 +194,58 @@ window.portfolioWorks = $json;
       continue
     }
 
+    if ($request.Url.AbsolutePath -eq "/api/fetch-cover") {
+      $targetUrl = $request.QueryString["url"]
+      if ([string]::IsNullOrWhiteSpace($targetUrl)) {
+        Send-Text $response 400 "Missing url."
+        continue
+      }
+
+      try {
+        $uri = [Uri]$targetUrl
+        $hostName = $uri.Host -replace "^www\.", ""
+        $youtubeId = ""
+        if ($hostName -eq "youtu.be") {
+          $youtubeId = $uri.AbsolutePath.Trim("/")
+        }
+        if ($hostName -in @("youtube.com", "m.youtube.com")) {
+          $query = [System.Web.HttpUtility]::ParseQueryString($uri.Query)
+          $youtubeId = $query["v"]
+          if ([string]::IsNullOrWhiteSpace($youtubeId)) {
+            $segments = $uri.AbsolutePath.Trim("/").Split("/")
+            $youtubeId = $segments[$segments.Length - 1]
+          }
+        }
+        if (-not [string]::IsNullOrWhiteSpace($youtubeId)) {
+          $imageUrl = "https://i.ytimg.com/vi/$youtubeId/hqdefault.jpg"
+          Send-Text $response 200 "{`"thumbnailUrl`":`"$imageUrl`"}" "application/json; charset=utf-8"
+          continue
+        }
+
+        $headers = @{
+          "User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome Safari/537.36"
+          "Accept-Language" = "zh-TW,zh;q=0.9,en;q=0.8"
+        }
+        $page = Invoke-WebRequest -Uri $targetUrl -Headers $headers -UseBasicParsing -TimeoutSec 20
+        $content = $page.Content
+        $match = [regex]::Match($content, '<meta\s+(?:property|name)=["''](?:og:image|twitter:image)["'']\s+content=["'']([^"'']+)["'']', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+        if (-not $match.Success) {
+          $match = [regex]::Match($content, '<meta\s+content=["'']([^"'']+)["'']\s+(?:property|name)=["''](?:og:image|twitter:image)["'']', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+        }
+
+        if (-not $match.Success) {
+          Send-Text $response 404 "Could not find a public cover image for this URL. Please upload a cover image manually."
+          continue
+        }
+
+        $imageUrl = [System.Net.WebUtility]::HtmlDecode($match.Groups[1].Value)
+        Send-Text $response 200 "{`"thumbnailUrl`":`"$imageUrl`"}" "application/json; charset=utf-8"
+      } catch {
+        Send-Text $response 500 "Could not fetch cover image. Meta may require login or block automated access. Please upload a cover image manually."
+      }
+      continue
+    }
+
     $path = [Uri]::UnescapeDataString($request.Url.AbsolutePath.TrimStart("/"))
     if ([string]::IsNullOrWhiteSpace($path)) {
       $path = "admin.html"

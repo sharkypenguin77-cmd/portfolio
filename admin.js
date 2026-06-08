@@ -18,6 +18,7 @@ const newButton = document.querySelector("#new-button");
 const deleteButton = document.querySelector("#delete-button");
 const uploadVideoButton = document.querySelector("#upload-video-button");
 const uploadCoverButton = document.querySelector("#upload-cover-button");
+const fetchCoverButton = document.querySelector("#fetch-cover-button");
 const thumbnailPreview = document.querySelector("#thumbnail-preview");
 const fields = form.elements;
 
@@ -279,6 +280,38 @@ uploadCoverButton.addEventListener("click", async () => {
   applyFormToActiveWork();
   fields.coverFile.value = "";
   setStatus(`封面圖已上傳並套用到目前作品：${result.url}。記得按「儲存作品資料」。`);
+});
+
+fetchCoverButton.addEventListener("click", async () => {
+  const videoUrl = fields.videoUrl.value.trim();
+  if (!videoUrl) {
+    setStatus("請先填入影片網址。");
+    return;
+  }
+
+  const youtubeThumbnail = getYoutubeThumbnailUrl(videoUrl);
+  if (youtubeThumbnail) {
+    fields.thumbnailUrl.value = youtubeThumbnail;
+    updateThumbnailPreview();
+    applyFormToActiveWork();
+    setStatus(`已抓取 YouTube 封面：${youtubeThumbnail}。記得按「儲存作品資料」。`);
+    return;
+  }
+
+  setStatus("正在嘗試抓取封面，請稍候...");
+  const response = await fetch(`/api/fetch-cover?url=${encodeURIComponent(videoUrl)}`);
+  const text = await response.text();
+
+  if (!response.ok) {
+    setStatus(text);
+    return;
+  }
+
+  const result = JSON.parse(text);
+  fields.thumbnailUrl.value = result.thumbnailUrl;
+  updateThumbnailPreview();
+  applyFormToActiveWork();
+  setStatus(`已抓取封面：${result.thumbnailUrl}。記得按「儲存作品資料」。`);
 });
 
 form.addEventListener("submit", (event) => {

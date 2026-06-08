@@ -94,9 +94,10 @@ http://127.0.0.1:8787/admin.html
 - 填入 YouTube、Vimeo、Instagram 或 Facebook 影片網址
 - YouTube / Vimeo 會自動產生嵌入網址，可以在網站內播放
 - Instagram 公開貼文會用 Instagram 內嵌顯示
-- Facebook 會作為外部連結，點圖片後開新分頁
+- Facebook 影片 / Reels 會嘗試用 Facebook 內嵌顯示
 - 如果要直接上傳影片檔，可以選擇 mp4、webm、mov、m4v 或 ogg，按「上傳影片並填入網址」
 - 如果要讓作品卡顯示封面，可以貼縮圖網址，或選擇 jpg、png、webp、gif 後按「上傳封面並填入網址」
+- 後台可以「嘗試抓取封面」；YouTube 最穩，Instagram / Facebook 可能因 Meta 權限限制失敗
 - 上傳影片檔或封面圖後，後台會自動套用到目前左側選取的作品
 - 可以在後台選擇封面「滿版裁切」或「完整顯示」，並用裁切焦點 X/Y 控制滿版裁切時保留的位置
 - 按「套用到清單」
