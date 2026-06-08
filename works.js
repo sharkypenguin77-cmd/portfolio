@@ -12,7 +12,7 @@ window.portfolioWorks = [
         "description":  "著重吸引力、節奏與社群觀看體驗",
         "videoUrl":  "https://www.instagram.com/reel/DYRlRqbD1s8/",
         "embedUrl":  "",
-        "thumbnailUrl":  "assets/covers/689540104_17940783333212396_3856789125628256322_n.jpg",
+        "thumbnailUrl":  "assets/covers/689540104_17940783333212396_3856789125628256322_n-20260608150044.jpg",
         "isSample":  false
     },
     {
@@ -23,9 +23,9 @@ window.portfolioWorks = [
         "role":  "影片剪輯 / 字幕 / 社群廣告",
         "tools":  "",
         "description":  "以攻略型內容整理寵物品牌全系列罐頭特色，協助觀眾快速理解產品差異。",
-        "videoUrl":  "https://www.facebook.com/100064776396124/posts/1078350394334164/",
-        "embedUrl":  "",
-        "thumbnailUrl":  "",
+        "videoUrl":  "https://youtube.com/shorts/meNCJ469rBU?feature=share",
+        "embedUrl":  "https://www.youtube.com/embed/meNCJ469rBU",
+        "thumbnailUrl":  "https://i.ytimg.com/vi/meNCJ469rBU/hqdefault.jpg",
         "isSample":  false
     },
     {
