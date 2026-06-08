@@ -9,7 +9,7 @@ window.portfolioWorks = [
         "categoryLabel":  "社群廣告",
         "role":  "企劃 / 拍攝 / 剪輯",
         "tools":  "",
-        "description":  "",
+        "description":  "設計HOOK讓觀眾對影片產生好奇，直擊痛點讓觀眾對產品有興趣",
         "videoUrl":  "https://youtube.com/shorts/ORJzL4OtSP4?feature=share",
         "embedUrl":  "https://www.youtube.com/embed/ORJzL4OtSP4",
         "thumbnailUrl":  "assets/covers/2026-06-08-152817.png",
