@@ -135,8 +135,12 @@ function renderWorks(filter = "all") {
     }
     if (work.thumbnailUrl) {
       thumb.style.backgroundImage = `url("${work.thumbnailUrl}")`;
-      thumb.style.backgroundSize = "cover";
-      thumb.style.backgroundPosition = "center";
+      thumb.style.backgroundSize = work.thumbnailFit === "contain" ? "contain" : "cover";
+      thumb.style.backgroundPosition = `${work.thumbnailPositionX ?? 50}% ${work.thumbnailPositionY ?? 50}%`;
+      thumb.style.backgroundRepeat = "no-repeat";
+      if (work.thumbnailFit === "contain") {
+        thumb.classList.add("fit-contain");
+      }
     }
 
     const body = document.createElement("div");

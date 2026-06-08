@@ -18,6 +18,7 @@ const newButton = document.querySelector("#new-button");
 const deleteButton = document.querySelector("#delete-button");
 const uploadVideoButton = document.querySelector("#upload-video-button");
 const uploadCoverButton = document.querySelector("#upload-cover-button");
+const thumbnailPreview = document.querySelector("#thumbnail-preview");
 const fields = form.elements;
 
 function setStatus(message) {
@@ -96,6 +97,9 @@ function emptyWork() {
     videoUrl: "",
     embedUrl: "",
     thumbnailUrl: "",
+    thumbnailFit: "cover",
+    thumbnailPositionX: 50,
+    thumbnailPositionY: 50,
     isSample: false
   };
 }
@@ -127,10 +131,14 @@ function loadForm() {
   fields.videoUrl.value = work.videoUrl || "";
   fields.embedUrl.value = work.embedUrl || getEmbedUrl(work.videoUrl);
   fields.thumbnailUrl.value = work.thumbnailUrl || "";
+  fields.thumbnailFit.value = work.thumbnailFit || "cover";
+  fields.thumbnailPositionX.value = work.thumbnailPositionX ?? 50;
+  fields.thumbnailPositionY.value = work.thumbnailPositionY ?? 50;
   fields.description.value = work.description || "";
   fields.isSample.checked = Boolean(work.isSample);
   fields.videoFile.value = "";
   fields.coverFile.value = "";
+  updateThumbnailPreview();
 }
 
 function readForm() {
@@ -147,8 +155,25 @@ function readForm() {
     videoUrl,
     embedUrl: getEmbedUrl(videoUrl),
     thumbnailUrl: fields.thumbnailUrl.value.trim(),
+    thumbnailFit: fields.thumbnailFit.value,
+    thumbnailPositionX: Number(fields.thumbnailPositionX.value || 50),
+    thumbnailPositionY: Number(fields.thumbnailPositionY.value || 50),
     isSample: fields.isSample.checked
   };
+}
+
+function updateThumbnailPreview() {
+  const imageUrl = fields.thumbnailUrl.value.trim();
+  const fit = fields.thumbnailFit.value || "cover";
+  const x = fields.thumbnailPositionX.value || 50;
+  const y = fields.thumbnailPositionY.value || 50;
+
+  thumbnailPreview.classList.toggle("has-image", Boolean(imageUrl));
+  thumbnailPreview.style.backgroundImage = imageUrl
+    ? `url("${imageUrl}")`
+    : "linear-gradient(135deg, rgba(80, 48, 96, 0.96), rgba(201, 167, 221, 0.84))";
+  thumbnailPreview.style.backgroundSize = imageUrl ? fit : "";
+  thumbnailPreview.style.backgroundPosition = `${x}% ${y}%`;
 }
 
 function applyFormToActiveWork() {
@@ -170,8 +195,14 @@ fields.videoUrl.addEventListener("input", () => {
 
   if (!fields.thumbnailUrl.value.trim()) {
     fields.thumbnailUrl.value = getYoutubeThumbnailUrl(videoUrl);
+    updateThumbnailPreview();
   }
 });
+
+fields.thumbnailUrl.addEventListener("input", updateThumbnailPreview);
+fields.thumbnailFit.addEventListener("change", updateThumbnailPreview);
+fields.thumbnailPositionX.addEventListener("input", updateThumbnailPreview);
+fields.thumbnailPositionY.addEventListener("input", updateThumbnailPreview);
 
 fields.category.addEventListener("change", () => {
   const work = readForm();
@@ -244,6 +275,7 @@ uploadCoverButton.addEventListener("click", async () => {
 
   const result = JSON.parse(text);
   fields.thumbnailUrl.value = result.url;
+  updateThumbnailPreview();
   applyFormToActiveWork();
   fields.coverFile.value = "";
   setStatus(`封面圖已上傳並套用到目前作品：${result.url}。記得按「儲存作品資料」。`);

@@ -83,6 +83,29 @@
             <input name="thumbnailUrl" placeholder="可先留空" />
           </label>
 
+          <div class="thumbnail-tools">
+            <div class="field-row">
+              <label>
+                封面顯示方式
+                <select name="thumbnailFit">
+                  <option value="cover">滿版裁切</option>
+                  <option value="contain">完整顯示</option>
+                </select>
+              </label>
+              <label>
+                裁切焦點 X
+                <input name="thumbnailPositionX" type="range" min="0" max="100" step="1" />
+              </label>
+            </div>
+            <label>
+              裁切焦點 Y
+              <input name="thumbnailPositionY" type="range" min="0" max="100" step="1" />
+            </label>
+            <div class="thumbnail-preview" id="thumbnail-preview" aria-label="封面預覽">
+              <span>封面預覽</span>
+            </div>
+          </div>
+
           <label>
             或上傳封面圖
             <input name="coverFile" type="file" accept="image/jpeg,image/png,image/webp,image/gif" />

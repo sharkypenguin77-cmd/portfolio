@@ -312,6 +312,10 @@ h2 {
   background: linear-gradient(135deg, #503060, #c9a7dd);
 }
 
+.work-thumb.fit-contain {
+  background-color: #211528;
+}
+
 .work-thumb.has-video::after {
   position: absolute;
   inset: 0;

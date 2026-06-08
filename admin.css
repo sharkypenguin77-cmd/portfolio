@@ -195,6 +195,32 @@ textarea {
   width: auto;
 }
 
+.thumbnail-tools {
+  display: grid;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: white;
+}
+
+.thumbnail-preview {
+  position: relative;
+  display: grid;
+  aspect-ratio: 16 / 9;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid #d9cfe0;
+  background:
+    linear-gradient(135deg, rgba(80, 48, 96, 0.96), rgba(201, 167, 221, 0.84));
+  background-repeat: no-repeat;
+  color: white;
+  font-weight: 800;
+}
+
+.thumbnail-preview.has-image span {
+  display: none;
+}
+
 .status {
   min-height: 48px;
   margin: 20px 0 0;

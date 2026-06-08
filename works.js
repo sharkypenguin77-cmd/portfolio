@@ -13,6 +13,9 @@ window.portfolioWorks = [
         "videoUrl":  "https://www.instagram.com/reel/DYRlRqbD1s8/",
         "embedUrl":  "",
         "thumbnailUrl":  "assets/covers/689540104_17940783333212396_3856789125628256322_n-20260608150044.jpg",
+        "thumbnailFit":  "contain",
+        "thumbnailPositionX":  50,
+        "thumbnailPositionY":  50,
         "isSample":  false
     },
     {
@@ -39,6 +42,9 @@ window.portfolioWorks = [
         "videoUrl":  "https://www.instagram.com/reel/DMPCaSWv74E/",
         "embedUrl":  "",
         "thumbnailUrl":  "assets/covers/520710063_18367420744147115_4609283519474633192_n-20260608145616.jpg",
+        "thumbnailFit":  "contain",
+        "thumbnailPositionX":  50,
+        "thumbnailPositionY":  50,
         "isSample":  false
     },
     {
