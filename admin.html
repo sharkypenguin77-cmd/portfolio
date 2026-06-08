@@ -61,9 +61,17 @@
           </label>
 
           <label>
-            影片網址 YouTube / Vimeo
-            <input name="videoUrl" placeholder="https://www.youtube.com/watch?v=..." />
+            影片網址 YouTube / Vimeo / Instagram / Facebook
+            <input name="videoUrl" placeholder="貼上 YouTube、Vimeo、IG 或 Facebook 影片網址" />
           </label>
+
+          <label>
+            或上傳影片檔
+            <input name="videoFile" type="file" accept="video/mp4,video/webm,video/quicktime,video/x-m4v" />
+          </label>
+
+          <button class="button secondary" type="button" id="upload-video-button">上傳影片並填入網址</button>
+          <p class="hint">YouTube / Vimeo 會在網站內播放；Instagram / Facebook 會開新分頁。若要直接上傳影片檔，建議單支小於 95MB。</p>
 
           <label>
             自動產生的嵌入網址

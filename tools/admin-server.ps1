@@ -33,6 +33,11 @@ function Get-ContentType {
     ".css" { "text/css; charset=utf-8" }
     ".js" { "text/javascript; charset=utf-8" }
     ".json" { "application/json; charset=utf-8" }
+    ".mp4" { "video/mp4" }
+    ".m4v" { "video/mp4" }
+    ".webm" { "video/webm" }
+    ".ogg" { "video/ogg" }
+    ".mov" { "video/quicktime" }
     default { "application/octet-stream" }
   }
 }
@@ -62,6 +67,57 @@ window.portfolioWorks = $json;
       continue
     }
 
+    if ($request.HttpMethod -eq "POST" -and $request.Url.AbsolutePath -eq "/api/upload-video") {
+      if ($request.ContentLength64 -gt 99500000) {
+        Send-Text $response 413 "Video is too large. Please keep files under 95MB, or use YouTube/Vimeo."
+        continue
+      }
+
+      $rawName = [Uri]::UnescapeDataString($request.Headers["X-File-Name"])
+      if ([string]::IsNullOrWhiteSpace($rawName)) {
+        Send-Text $response 400 "Missing file name."
+        continue
+      }
+
+      $fileName = [System.IO.Path]::GetFileName($rawName)
+      foreach ($char in [System.IO.Path]::GetInvalidFileNameChars()) {
+        $fileName = $fileName.Replace($char, "-")
+      }
+
+      $extension = [System.IO.Path]::GetExtension($fileName).ToLowerInvariant()
+      if ($extension -notin @(".mp4", ".webm", ".mov", ".m4v", ".ogg")) {
+        Send-Text $response 400 "Unsupported video type. Use mp4, webm, mov, m4v, or ogg."
+        continue
+      }
+
+      $videoDir = Join-Path $root "assets\videos"
+      [System.IO.Directory]::CreateDirectory($videoDir) | Out-Null
+
+      $baseName = [System.IO.Path]::GetFileNameWithoutExtension($fileName)
+      $safeName = ($baseName -replace "[^A-Za-z0-9._-]", "-").Trim("-")
+      if ([string]::IsNullOrWhiteSpace($safeName)) {
+        $safeName = "video"
+      }
+
+      $targetName = "$safeName$extension"
+      $targetPath = Join-Path $videoDir $targetName
+      if ([System.IO.File]::Exists($targetPath)) {
+        $targetName = "$safeName-$(Get-Date -Format 'yyyyMMddHHmmss')$extension"
+        $targetPath = Join-Path $videoDir $targetName
+      }
+
+      $fileStream = [System.IO.File]::Create($targetPath)
+      try {
+        $request.InputStream.CopyTo($fileStream)
+      } finally {
+        $fileStream.Close()
+      }
+
+      $publicPath = "assets/videos/$targetName"
+      Send-Text $response 200 "{`"url`":`"$publicPath`"}" "application/json; charset=utf-8"
+      continue
+    }
+
     if ($request.HttpMethod -eq "POST" -and $request.Url.AbsolutePath -eq "/api/deploy") {
       $status = git -C $root status --short
       if (-not $status) {
@@ -69,7 +125,7 @@ window.portfolioWorks = $json;
         continue
       }
 
-      git -C $root add works.js
+      git -C $root add works.js assets/videos
       git -C $root commit -m "Update portfolio works"
       git -C $root push
 

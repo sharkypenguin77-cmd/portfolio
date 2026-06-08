@@ -91,9 +91,14 @@ http://127.0.0.1:8787/admin.html
 使用方式：
 
 - 按「新增作品」建立新作品
-- 填入 YouTube 或 Vimeo 影片網址，後台會自動產生嵌入網址
+- 填入 YouTube、Vimeo、Instagram 或 Facebook 影片網址
+- YouTube / Vimeo 會自動產生嵌入網址，可以在網站內播放
+- Instagram / Facebook 會作為外部連結，點圖片後開新分頁
+- 如果要直接上傳影片檔，可以選擇 mp4、webm、mov、m4v 或 ogg，按「上傳影片並填入網址」
 - 按「套用到清單」
 - 按「儲存作品資料」寫入 `works.js`
 - 確認本機網站沒問題後，按「部署上線」
 
 部署完成後，GitHub Pages 通常 1 到 3 分鐘後會更新。
+
+注意：GitHub 不適合放很大的影片檔。單支影片請盡量小於 95MB；更大的作品建議上傳到 YouTube 或 Vimeo，再把網址貼到後台。

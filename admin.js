@@ -16,6 +16,7 @@ const saveButton = document.querySelector("#save-button");
 const deployButton = document.querySelector("#deploy-button");
 const newButton = document.querySelector("#new-button");
 const deleteButton = document.querySelector("#delete-button");
+const uploadVideoButton = document.querySelector("#upload-video-button");
 const fields = form.elements;
 
 function setStatus(message) {
@@ -51,6 +52,11 @@ function getEmbedUrl(url) {
   }
 
   return "";
+}
+
+function isDirectVideoUrl(url) {
+  if (!url) return false;
+  return /\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i.test(url);
 }
 
 function emptyWork() {
@@ -120,12 +126,47 @@ function readForm() {
 }
 
 fields.videoUrl.addEventListener("input", () => {
-  fields.embedUrl.value = getEmbedUrl(fields.videoUrl.value.trim());
+  const videoUrl = fields.videoUrl.value.trim();
+  fields.embedUrl.value = isDirectVideoUrl(videoUrl) ? "" : getEmbedUrl(videoUrl);
 });
 
 fields.category.addEventListener("change", () => {
   const work = readForm();
   fields.embedUrl.value = work.embedUrl;
+});
+
+uploadVideoButton.addEventListener("click", async () => {
+  const file = fields.videoFile.files[0];
+  if (!file) {
+    setStatus("請先選擇影片檔。");
+    return;
+  }
+
+  if (file.size > 95 * 1024 * 1024) {
+    setStatus("這支影片超過 95MB，建議改上傳到 YouTube 或 Vimeo，再貼網址。");
+    return;
+  }
+
+  setStatus("影片上傳中，請稍候...");
+  const response = await fetch("/api/upload-video", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/octet-stream",
+      "X-File-Name": encodeURIComponent(file.name)
+    },
+    body: file
+  });
+
+  const text = await response.text();
+  if (!response.ok) {
+    setStatus(text);
+    return;
+  }
+
+  const result = JSON.parse(text);
+  fields.videoUrl.value = result.url;
+  fields.embedUrl.value = "";
+  setStatus(`影片已上傳：${result.url}。記得按「套用到清單」和「儲存作品資料」。`);
 });
 
 form.addEventListener("submit", (event) => {

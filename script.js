@@ -38,15 +38,24 @@ function getEmbedUrl(url) {
   return "";
 }
 
+function isDirectVideoUrl(url) {
+  if (!url) return false;
+  return /\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i.test(url);
+}
+
 function openVideo(work) {
   const embedUrl = work.embedUrl || getEmbedUrl(work.videoUrl);
-  if (!embedUrl) {
+  const hasDirectVideo = isDirectVideoUrl(work.videoUrl);
+
+  if (!embedUrl && !hasDirectVideo) {
     window.open(work.videoUrl, "_blank", "noreferrer");
     return;
   }
 
   videoModalTitle.textContent = work.title;
-  videoFrame.innerHTML = `<iframe src="${embedUrl}" title="${work.title}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+  videoFrame.innerHTML = hasDirectVideo
+    ? `<video src="${work.videoUrl}" title="${work.title}" controls playsinline></video>`
+    : `<iframe src="${embedUrl}" title="${work.title}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
   videoModal.hidden = false;
   document.body.style.overflow = "hidden";
 }
@@ -72,6 +81,16 @@ function renderWorks(filter = "all") {
     thumb.className = "work-thumb";
     if (work.videoUrl || work.embedUrl) {
       thumb.classList.add("has-video");
+      thumb.setAttribute("role", "button");
+      thumb.setAttribute("tabindex", "0");
+      thumb.setAttribute("aria-label", `播放或開啟 ${work.title}`);
+      thumb.addEventListener("click", () => openVideo(work));
+      thumb.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openVideo(work);
+        }
+      });
     }
     if (work.thumbnailUrl) {
       thumb.style.backgroundImage = `url("${work.thumbnailUrl}")`;
@@ -100,16 +119,6 @@ function renderWorks(filter = "all") {
     description.textContent = work.description;
 
     body.append(meta, title, description);
-
-    if (work.videoUrl) {
-      const button = document.createElement("button");
-      button.className = "work-link";
-      button.type = "button";
-      button.textContent = getEmbedUrl(work.videoUrl) || work.embedUrl ? "播放影片" : "開啟影片";
-      button.addEventListener("click", () => openVideo(work));
-      body.append(button);
-    }
-
     card.append(thumb, body);
     worksGrid.append(card);
   });
