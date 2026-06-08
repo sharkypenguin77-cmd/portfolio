@@ -6,6 +6,8 @@ const videoModal = document.querySelector("#video-modal");
 const videoModalPanel = document.querySelector(".video-modal-panel");
 const videoFrame = document.querySelector("#video-frame");
 const videoModalTitle = document.querySelector("#video-modal-title");
+const categoryOrder = ["youtube", "social-ad", "short", "nonprofit", "brand"];
+const categoryRank = new Map(categoryOrder.map((category, index) => [category, index]));
 
 year.textContent = new Date().getFullYear();
 
@@ -131,7 +133,13 @@ function closeVideo() {
 
 function renderWorks(filter = "all") {
   const works = window.portfolioWorks || [];
-  const visibleWorks = filter === "all" ? works : works.filter((work) => work.category === filter);
+  const visibleWorks = filter === "all"
+    ? [...works].sort((a, b) => {
+        const rankA = categoryRank.get(a.category) ?? categoryOrder.length;
+        const rankB = categoryRank.get(b.category) ?? categoryOrder.length;
+        return rankA - rankB;
+      })
+    : works.filter((work) => work.category === filter);
 
   worksGrid.innerHTML = "";
   emptyState.hidden = visibleWorks.length > 0;
