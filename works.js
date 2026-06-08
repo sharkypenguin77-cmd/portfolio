@@ -126,9 +126,12 @@ window.portfolioWorks = [
         "role":  "企劃 / 拍攝 / 影片剪輯",
         "tools":  "",
         "description":  "公益社群影片作品，協助議題以更容易被觀看與分享的方式傳達",
-        "videoUrl":  "https://www.instagram.com/dogcat.star/reel/DONMxmLEnp3/",
+        "videoUrl":  "https://www.instagram.com/reel/DONMxmLEnp3/?utm_source=ig_web_copy_link\u0026igsh=NTc4MTIwNjQ2YQ==",
         "embedUrl":  "",
-        "thumbnailUrl":  "",
+        "thumbnailUrl":  "assets/covers/2025_---EP1_COVER.jpg",
+        "thumbnailFit":  "contain",
+        "thumbnailPositionX":  50,
+        "thumbnailPositionY":  50,
         "isSample":  false
     }
 ];
