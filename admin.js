@@ -129,6 +129,8 @@ function loadForm() {
   fields.thumbnailUrl.value = work.thumbnailUrl || "";
   fields.description.value = work.description || "";
   fields.isSample.checked = Boolean(work.isSample);
+  fields.videoFile.value = "";
+  fields.coverFile.value = "";
 }
 
 function readForm() {
@@ -147,6 +149,19 @@ function readForm() {
     thumbnailUrl: fields.thumbnailUrl.value.trim(),
     isSample: fields.isSample.checked
   };
+}
+
+function applyFormToActiveWork() {
+  const work = readForm();
+
+  if (activeIndex === -1) {
+    works.unshift(work);
+    activeIndex = 0;
+  } else {
+    works[activeIndex] = work;
+  }
+
+  renderList();
 }
 
 fields.videoUrl.addEventListener("input", () => {
@@ -194,7 +209,9 @@ uploadVideoButton.addEventListener("click", async () => {
   const result = JSON.parse(text);
   fields.videoUrl.value = result.url;
   fields.embedUrl.value = "";
-  setStatus(`影片已上傳：${result.url}。記得按「套用到清單」和「儲存作品資料」。`);
+  applyFormToActiveWork();
+  fields.videoFile.value = "";
+  setStatus(`影片已上傳並套用到目前作品：${result.url}。記得按「儲存作品資料」。`);
 });
 
 uploadCoverButton.addEventListener("click", async () => {
@@ -227,21 +244,14 @@ uploadCoverButton.addEventListener("click", async () => {
 
   const result = JSON.parse(text);
   fields.thumbnailUrl.value = result.url;
-  setStatus(`封面圖已上傳：${result.url}。記得按「套用到清單」和「儲存作品資料」。`);
+  applyFormToActiveWork();
+  fields.coverFile.value = "";
+  setStatus(`封面圖已上傳並套用到目前作品：${result.url}。記得按「儲存作品資料」。`);
 });
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  const work = readForm();
-
-  if (activeIndex === -1) {
-    works.unshift(work);
-    activeIndex = 0;
-  } else {
-    works[activeIndex] = work;
-  }
-
-  renderList();
+  applyFormToActiveWork();
   loadForm();
   setStatus("已套用到清單。記得按「儲存作品資料」寫入 works.js。");
 });

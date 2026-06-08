@@ -12,7 +12,7 @@ window.portfolioWorks = [
         "description":  "著重吸引力、節奏與社群觀看體驗",
         "videoUrl":  "https://www.instagram.com/reel/DYRlRqbD1s8/",
         "embedUrl":  "",
-        "thumbnailUrl":  "",
+        "thumbnailUrl":  "assets/covers/689540104_17940783333212396_3856789125628256322_n.jpg",
         "isSample":  false
     },
     {
@@ -38,7 +38,7 @@ window.portfolioWorks = [
         "description":  "以感性敘事呈現寵物拓印相框，強化情感記憶與產品價值。",
         "videoUrl":  "https://www.instagram.com/reel/DMPCaSWv74E/",
         "embedUrl":  "",
-        "thumbnailUrl":  "",
+        "thumbnailUrl":  "assets/covers/520710063_18367420744147115_4609283519474633192_n-20260608145616.jpg",
         "isSample":  false
     },
     {
