@@ -401,6 +401,10 @@ h2 {
   box-shadow: 0 30px 80px rgba(33, 21, 40, 0.32);
 }
 
+.video-modal-panel.is-instagram {
+  width: min(620px, 100%);
+}
+
 .video-modal-close {
   position: absolute;
   top: -46px;
@@ -420,6 +424,22 @@ h2 {
 .video-frame {
   aspect-ratio: 16 / 9;
   background: #211528;
+}
+
+.video-frame.instagram-frame {
+  display: grid;
+  aspect-ratio: auto;
+  max-height: 78vh;
+  min-height: 520px;
+  overflow: auto;
+  place-items: center;
+  background: #ffffff;
+  padding: 14px;
+}
+
+.video-frame.instagram-frame .instagram-media {
+  min-width: 326px !important;
+  width: min(540px, 100%) !important;
 }
 
 .video-frame iframe {

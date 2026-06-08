@@ -3,6 +3,7 @@ const emptyState = document.querySelector("#empty-state");
 const filterButtons = document.querySelectorAll(".filter-button");
 const year = document.querySelector("#year");
 const videoModal = document.querySelector("#video-modal");
+const videoModalPanel = document.querySelector(".video-modal-panel");
 const videoFrame = document.querySelector("#video-frame");
 const videoModalTitle = document.querySelector("#video-modal-title");
 
@@ -43,25 +44,64 @@ function isDirectVideoUrl(url) {
   return /\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i.test(url);
 }
 
+function isInstagramUrl(url) {
+  if (!url) return false;
+
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, "");
+    return host === "instagram.com";
+  } catch (error) {
+    return false;
+  }
+}
+
+function loadInstagramEmbed() {
+  if (window.instgrm?.Embeds?.process) {
+    window.instgrm.Embeds.process();
+    return;
+  }
+
+  if (document.querySelector('script[src="https://www.instagram.com/embed.js"]')) {
+    return;
+  }
+
+  const script = document.createElement("script");
+  script.src = "https://www.instagram.com/embed.js";
+  script.async = true;
+  document.body.append(script);
+}
+
 function openVideo(work) {
   const embedUrl = work.embedUrl || getEmbedUrl(work.videoUrl);
   const hasDirectVideo = isDirectVideoUrl(work.videoUrl);
+  const hasInstagramEmbed = isInstagramUrl(work.videoUrl);
 
-  if (!embedUrl && !hasDirectVideo) {
+  if (!embedUrl && !hasDirectVideo && !hasInstagramEmbed) {
     window.open(work.videoUrl, "_blank", "noreferrer");
     return;
   }
 
   videoModalTitle.textContent = work.title;
-  videoFrame.innerHTML = hasDirectVideo
-    ? `<video src="${work.videoUrl}" title="${work.title}" controls playsinline></video>`
-    : `<iframe src="${embedUrl}" title="${work.title}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+  videoModalPanel.classList.toggle("is-instagram", hasInstagramEmbed);
+  videoFrame.classList.toggle("instagram-frame", hasInstagramEmbed);
+
+  if (hasInstagramEmbed) {
+    videoFrame.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${work.videoUrl}" data-instgrm-version="14"></blockquote>`;
+    loadInstagramEmbed();
+  } else {
+    videoFrame.innerHTML = hasDirectVideo
+      ? `<video src="${work.videoUrl}" title="${work.title}" controls playsinline></video>`
+      : `<iframe src="${embedUrl}" title="${work.title}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+  }
+
   videoModal.hidden = false;
   document.body.style.overflow = "hidden";
 }
 
 function closeVideo() {
   videoModal.hidden = true;
+  videoModalPanel.classList.remove("is-instagram");
+  videoFrame.classList.remove("instagram-frame");
   videoFrame.innerHTML = "";
   document.body.style.overflow = "";
 }

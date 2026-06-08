@@ -93,7 +93,8 @@ http://127.0.0.1:8787/admin.html
 - 按「新增作品」建立新作品
 - 填入 YouTube、Vimeo、Instagram 或 Facebook 影片網址
 - YouTube / Vimeo 會自動產生嵌入網址，可以在網站內播放
-- Instagram / Facebook 會作為外部連結，點圖片後開新分頁
+- Instagram 公開貼文會用 Instagram 內嵌顯示
+- Facebook 會作為外部連結，點圖片後開新分頁
 - 如果要直接上傳影片檔，可以選擇 mp4、webm、mov、m4v 或 ogg，按「上傳影片並填入網址」
 - 按「套用到清單」
 - 按「儲存作品資料」寫入 `works.js`
