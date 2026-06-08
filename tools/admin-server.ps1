@@ -1,10 +1,28 @@
 $ErrorActionPreference = "Stop"
 
 $root = Split-Path -Parent $PSScriptRoot
-$prefix = "http://127.0.0.1:8787/"
-$listener = [System.Net.HttpListener]::new()
-$listener.Prefixes.Add($prefix)
-$listener.Start()
+$listener = $null
+
+$port = 8787
+$started = $false
+while (-not $started -and $port -le 8797) {
+  $prefix = "http://127.0.0.1:$port/"
+  $listener = [System.Net.HttpListener]::new()
+  $listener.Prefixes.Add($prefix)
+
+  try {
+    $listener.Start()
+    $started = $true
+  } catch [System.Net.HttpListenerException] {
+    $listener.Close()
+
+    if ($port -eq 8797) {
+      throw
+    }
+
+    $port += 1
+  }
+}
 
 Write-Host "Portfolio admin is running:"
 Write-Host "$($prefix)admin.html"
@@ -62,7 +80,7 @@ while ($listener.IsListening) {
       $json = $works | ConvertTo-Json -Depth 8
       $content = @"
 // Add your portfolio items here. Keep newest or strongest works near the top.
-// This file can be updated manually or with the local admin at http://127.0.0.1:8787/admin.html.
+// This file can be updated manually or with the local admin at $($prefix)admin.html.
 
 window.portfolioWorks = $json;
 "@
